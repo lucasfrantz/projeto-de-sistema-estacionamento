@@ -1,0 +1,89 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id    String     @id @default(uuid())
+  
+  name  String
+  password String
+  login String @unique
+  email String @unique
+  phoneNumber String @unique
+  
+  vehicles Vehicle[]
+  managedParkingLots ParkingLotAdmin[]
+}
+
+model Vehicle{
+  id    String     @id @default(uuid())
+  
+  licensePlate  String
+  model String
+  color String
+
+  owner User @relation(fields: [ownerId], references:[id])
+  ownerId String
+
+  occupations Occupation[]
+}
+
+model ParkingSpot{
+  id    String     @id @default(uuid())
+  number Int
+
+  parkingLot ParkingLot @relation(fields: [parkingLotId], references:[id])
+  parkingLotId String
+
+  parkingSpotType ParkingSpotType @relation(fields: [parkingSpotTypeId], references:[id])
+  parkingSpotTypeId String
+
+  occupations Occupation[]
+}
+
+model Occupation{
+  vehicle Vehicle @relation(fields: [vehicleId], references:[id])
+  vehicleId String
+
+  parkingSpot ParkingSpot @relation(fields: [parkingSpotId], references:[id])
+  parkingSpotId String
+
+  arrivedAt DateTime
+  leftAt DateTime?
+
+  @@unique([vehicleId, parkingSpotId, arrivedAt], name: "idx_occupation_unique")
+}
+
+model ParkingLot{
+  id    String     @id @default(uuid())
+  name String
+  phoneNumber String @unique
+  email String @unique
+
+  admins ParkingLotAdmin[]
+  spots ParkingSpot[]
+}
+
+model ParkingSpotType{
+  id    String     @id @default(uuid())
+  name String
+  price Decimal
+  size String
+
+  spots ParkingSpot[]
+}
+
+model ParkingLotAdmin{
+  parkingLot ParkingLot @relation(fields: [parkingLotId], references:[id])
+  parkingLotId String
+
+  user User @relation(fields: [useId], references:[id])
+  useId String
+
+  @@unique([parkingLotId, useId], name: "idx_parkinglotadmin_unique")
+}
