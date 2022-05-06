@@ -1,15 +1,16 @@
 import { Prisma, PrismaClient } from "@prisma/client";
 import express from "express";
+import usersRouter from "./routes/user";
 
 const prisma = new PrismaClient();
 const app = express();
 
 app.use(express.json());
 
-app.get(`/`, async (req, res) => {
-  res.json("Hello World!");
-});
+app.use("/users", usersRouter);
 
 const server = app.listen(process.env.PORT, () =>
-  console.log(`running at ${process.env.PORT}`)
+  console.log(`
+🚀 Server ready at: http://localhost:${process.env.PORT}
+⭐️ See sample requests: http://pris.ly/e/ts/rest-express#3-using-the-rest-api`)
 );
