@@ -11,6 +11,5 @@ app.use("/users", usersRouter);
 
 const server = app.listen(process.env.PORT, () =>
   console.log(`
-🚀 Server ready at: http://localhost:${process.env.PORT}
-⭐️ See sample requests: http://pris.ly/e/ts/rest-express#3-using-the-rest-api`)
+🚀 Server ready at: http://localhost:${process.env.PORT}`)
 );
