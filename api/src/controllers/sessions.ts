@@ -1,0 +1,44 @@
+import { PrismaClient } from "@prisma/client";
+import express from "express";
+import AppError from "../error";
+import bcrypt, { hash } from "bcrypt";
+
+const prisma = new PrismaClient();
+
+export default class SessionsContoller {
+  constructor() {}
+
+  async register(req: express.Request, res: express.Response) {
+    const { name, login, phoneNumber, email, password } = req.body;
+
+    const salt = await bcrypt.genSalt(10);
+
+    const hashedPassword = await bcrypt.hash(password, salt);
+
+    const user = await prisma.user.create({
+      data: { name, login, phoneNumber, email, password: hashedPassword },
+    });
+
+    res.status(201).json(user);
+  }
+
+  async login(req: express.Request, res: express.Response) {
+    const { login, password } = req.body;
+
+    const user = await prisma.user.findUnique({
+      where: { login },
+    });
+
+    if (!user) {
+      throw new AppError("user_not_found", 401);
+    }
+
+    const validPassword = await bcrypt.compare(password, user.password);
+
+    if (!validPassword) {
+      throw new AppError("invalid_password", 401);
+    }
+
+    res.json(user);
+  }
+}

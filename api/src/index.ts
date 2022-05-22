@@ -1,5 +1,6 @@
 import { Prisma, PrismaClient } from "@prisma/client";
 import express from "express";
+import sessionsRouter from "./routes/sessions";
 import usersRouter from "./routes/user";
 
 const prisma = new PrismaClient();
@@ -8,6 +9,7 @@ const app = express();
 app.use(express.json());
 
 app.use("/users", usersRouter);
+app.use("/sessions", sessionsRouter);
 
 app.use(function (
   err: Error,
@@ -15,7 +17,7 @@ app.use(function (
   res: express.Response,
   next: express.NextFunction
 ) {
-  console.error(err.stack);
+  // console.error(err.stack);
   res.status(500).send(err.message);
 });
 
