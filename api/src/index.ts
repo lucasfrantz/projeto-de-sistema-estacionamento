@@ -1,5 +1,7 @@
+require("express-async-errors");
 import { Prisma, PrismaClient } from "@prisma/client";
 import express from "express";
+import AppError from "./error";
 import sessionsRouter from "./routes/sessions";
 import usersRouter from "./routes/user";
 
@@ -17,8 +19,19 @@ app.use(function (
   res: express.Response,
   next: express.NextFunction
 ) {
-  // console.error(err.stack);
-  res.status(500).send(err.message);
+  // console.log(err);
+  // if (err instanceof AppError) {
+  //   console.log("xxxxx");
+  //   return res.status(err.statusCode).json({
+  //     status: "error",
+  //     message: err.message,
+  //   });
+  // }
+
+  res.status(500).json({
+    status: "error",
+    message: err.message,
+  });
 });
 
 const server = app.listen(process.env.PORT, () =>
