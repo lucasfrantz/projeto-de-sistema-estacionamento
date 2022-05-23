@@ -1,8 +1,8 @@
 import { PrismaClient } from "@prisma/client";
 import express from "express";
 import AppError from "../error";
-import bcrypt, { hash } from "bcrypt";
-
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 const prisma = new PrismaClient();
 
 export default class SessionsContoller {
@@ -39,6 +39,21 @@ export default class SessionsContoller {
       throw new AppError("invalid_password", 401);
     }
 
-    res.json(user);
+    jwt.sign(
+      { id: user.id, name: user.name, login: user.login, email: user.email },
+      process.env.SECRET || "",
+      (err: Error | null, token: string | undefined) => {
+        if (err) {
+          res.status(500).json({ mensagem: "Erro ao gerar o JWT" });
+
+          return;
+        }
+
+        res.set("x-access-token", token);
+        res.end();
+      }
+    );
+
+    // res.json(user);
   }
 }

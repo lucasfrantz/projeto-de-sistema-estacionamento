@@ -5,5 +5,11 @@
     "strict": true,
     "lib": ["esnext"],
     "esModuleInterop": true
+  },
+
+  "files": ["src/@types/express.d.ts"],
+  "typeRoots": ["src/@types"],
+  "ts-node": {
+    "files": true
   }
 }
