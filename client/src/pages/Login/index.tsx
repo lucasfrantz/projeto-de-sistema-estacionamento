@@ -3,6 +3,7 @@ import { Container, LoginFormContainer } from "./styles";
 import { Form } from "@unform/web";
 import { useRef } from "react";
 import { api } from "../../api";
+import { useNavigate } from "react-router-dom";
 
 interface LoginFormData {
   login: string;
@@ -11,7 +12,7 @@ interface LoginFormData {
 
 export function Login() {
   const formRef = useRef(null);
-
+  const navigate = useNavigate();
   const handleSubmit = async (data: LoginFormData) => {
     console.log(data);
 
@@ -26,6 +27,7 @@ export function Login() {
         "@sistema-estacionamento:user",
         JSON.stringify(response.data.user)
       );
+      navigate("/dashboard", { replace: true });
       console.log(response.data);
     } catch (e) {
       console.log(e);
