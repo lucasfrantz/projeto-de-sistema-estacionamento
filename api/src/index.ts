@@ -4,10 +4,11 @@ import express from "express";
 import AppError from "./error";
 import sessionsRouter from "./routes/sessions";
 import usersRouter from "./routes/user";
-
+import cors from "cors";
 const prisma = new PrismaClient();
 const app = express();
 
+app.use(cors());
 app.use(express.json());
 
 app.use("/users", usersRouter);

@@ -1,26 +1,45 @@
+import { Input } from "../../components/Input";
 import { Container, LoginFormContainer } from "./styles";
+import { Form } from "@unform/web";
+import { useRef } from "react";
+import { api } from "../../api";
+
+interface LoginFormData {
+  login: string;
+  password: string;
+}
 
 export function Login() {
-  // const handleSubmit = (data: any) => {
-  //   console.log(data);
-  // };
+  const formRef = useRef(null);
+
+  const handleSubmit = async (data: LoginFormData) => {
+    console.log(data);
+
+    try {
+      const response = await api.post("/sessions/login", data);
+
+      console.log(response.data);
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   return (
     <Container>
       <LoginFormContainer>
-        <form>
+        <Form ref={formRef} onSubmit={handleSubmit}>
           <div>
             <label htmlFor="login">Login: </label>
-            <input type="text" name="login" placeholder="Login" />
+            <Input type="text" name="login" placeholder="Login" />
           </div>
           <div>
             <label htmlFor="password">Senha: </label>
-            <input type="password" name="password" placeholder="Senha" />
+            <Input type="password" name="password" placeholder="Senha" />
           </div>
           <div style={{ display: "flex", flexDirection: "row-reverse" }}>
-            <button>Entrar</button>
+            <button type="submit">Entrar</button>
           </div>
-        </form>
+        </Form>
       </LoginFormContainer>
     </Container>
   );

@@ -24,7 +24,7 @@ export default class SessionsContoller {
 
   async login(req: express.Request, res: express.Response) {
     const { login, password } = req.body;
-
+    console.log(login);
     const user = await prisma.user.findUnique({
       where: { login },
     });
@@ -50,7 +50,7 @@ export default class SessionsContoller {
         }
 
         res.set("x-access-token", token);
-        res.end();
+        res.json({ accessToken: token });
       }
     );
 
