@@ -17,7 +17,15 @@ export function Login() {
 
     try {
       const response = await api.post("/sessions/login", data);
+      localStorage.setItem(
+        "@sistema-estacionamento:token",
+        response.data.accessToken
+      );
 
+      localStorage.setItem(
+        "@sistema-estacionamento:user",
+        JSON.stringify(response.data.user)
+      );
       console.log(response.data);
     } catch (e) {
       console.log(e);

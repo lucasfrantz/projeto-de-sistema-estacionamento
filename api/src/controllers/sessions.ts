@@ -50,7 +50,7 @@ export default class SessionsContoller {
         }
 
         res.set("x-access-token", token);
-        res.json({ accessToken: token });
+        res.json({ user, accessToken: token });
       }
     );
 
