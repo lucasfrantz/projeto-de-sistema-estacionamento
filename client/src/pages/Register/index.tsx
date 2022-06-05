@@ -5,21 +5,22 @@ import { useRef } from "react";
 import { api } from "../../services/api";
 import { Link, useNavigate } from "react-router-dom";
 
-import icon from "../../assets/logo.webp";
-
 interface LoginFormData {
+  email: string;
+  name: string;
+  phoneNumber: string;
   login: string;
   password: string;
 }
 
-export function Login() {
+export function Register() {
   const formRef = useRef(null);
   const navigate = useNavigate();
   const handleSubmit = async (data: LoginFormData) => {
     console.log(data);
 
     try {
-      const response = await api.post("/sessions/login", data);
+      const response = await api.post("/sessions/register", data);
       localStorage.setItem(
         "@sistema-estacionamento:token",
         response.data.accessToken
@@ -39,8 +40,15 @@ export function Login() {
   return (
     <Container>
       <LoginFormContainer>
-        <img src={icon} style={{ width: "150px" }} alt="logo" />
         <Form ref={formRef} onSubmit={handleSubmit}>
+          <Input label="Nome" type="text" name="name" placeholder="Nome" />
+          <Input label="Email" type="text" name="email" placeholder="Email" />
+          <Input
+            label="Celular"
+            type="text"
+            name="phoneNumber"
+            placeholder="Celular"
+          />
           <Input label="Login" type="text" name="login" placeholder="Login" />
           <Input
             label="Senha"
@@ -52,7 +60,7 @@ export function Login() {
             <button type="submit">Entrar</button>
           </div>
         </Form>
-        <Link to="/register">Registre-se aqui</Link>
+        <Link to="/login">Faça login</Link>
       </LoginFormContainer>
     </Container>
   );
