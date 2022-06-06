@@ -6,6 +6,7 @@ import { api } from "../../services/api";
 import { Link, useNavigate } from "react-router-dom";
 
 import icon from "../../assets/logo.webp";
+import { useAuth } from "../../hooks/auth";
 
 interface LoginFormData {
   login: string;
@@ -15,22 +16,13 @@ interface LoginFormData {
 export function Login() {
   const formRef = useRef(null);
   const navigate = useNavigate();
+  const { Login } = useAuth();
   const handleSubmit = async (data: LoginFormData) => {
     console.log(data);
 
     try {
-      const response = await api.post("/sessions/login", data);
-      localStorage.setItem(
-        "@sistema-estacionamento:token",
-        response.data.accessToken
-      );
-
-      localStorage.setItem(
-        "@sistema-estacionamento:user",
-        JSON.stringify(response.data.user)
-      );
+      await Login(data);
       navigate("/dashboard", { replace: true });
-      console.log(response.data);
     } catch (e) {
       console.log(e);
     }

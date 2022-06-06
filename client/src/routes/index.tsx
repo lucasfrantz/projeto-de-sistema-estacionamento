@@ -21,9 +21,9 @@ export const Router = () => {
       <Route
         path="dashboard"
         element={
-          // <ProtectedRoute user={user}>
+          <ProtectedRoute user={user}>
             <Dashboard />
-          /* </ProtectedRoute> */
+          </ProtectedRoute>
         }
       />
 
