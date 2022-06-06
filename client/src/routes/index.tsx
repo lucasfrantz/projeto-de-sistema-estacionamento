@@ -10,6 +10,7 @@ import { useAuth } from "../hooks/auth";
 import { Login } from "../pages/Login";
 import { Register } from "../pages/Register";
 import { ProtectedRoute } from "./ProtectedRoute";
+import Dashboard from "../pages/Dashboard";
 
 export const Router = () => {
   const { user } = useAuth();
@@ -17,16 +18,16 @@ export const Router = () => {
     <Routes>
       <Route path="*" element={<Login />} />
       <Route path="register" element={<Register />} />
-      {/* <Route
-        path="register"
+      <Route
+        path="dashboard"
         element={
-          <ProtectedRoute user={user}>
-            <Register />
-          </ProtectedRoute>
+          // <ProtectedRoute user={user}>
+            <Dashboard />
+          /* </ProtectedRoute> */
         }
-      /> */}
+      />
+
       <Route path="login" element={<Login />} />
-      {/* <Route path="dashboard"><Home /></Route> */}
     </Routes>
   );
 };
