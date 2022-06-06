@@ -5,13 +5,16 @@ import { Login } from "./pages/Login";
 import { GlobalStyle } from "./styles/global";
 import { Router } from "./routes";
 import { BrowserRouter } from "react-router-dom";
+import { AuthProvider } from "./hooks/auth";
 
 function App() {
   return (
     <>
       <GlobalStyle />
       <BrowserRouter>
-        <Router />
+        <AuthProvider>
+          <Router />
+        </AuthProvider>
       </BrowserRouter>
     </>
   );

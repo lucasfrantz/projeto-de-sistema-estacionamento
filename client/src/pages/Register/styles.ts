@@ -12,11 +12,11 @@ export const Container = styled.div`
 export const LoginFormContainer = styled.div`
   background-color: var(--green);
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
   width: 400px;
   height: 400px;
   border-radius: 8px;
   box-shadow: 0 0 1em var(--blue-200);
+  flex-direction: column;
 `;

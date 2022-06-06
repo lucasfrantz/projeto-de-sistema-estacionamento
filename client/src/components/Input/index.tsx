@@ -5,9 +5,16 @@ interface InputProps extends HTMLAttributes<HTMLInputElement> {
   name: string;
   placeholder: string;
   type: string;
+  label: string;
 }
 
-export const Input = ({ name, placeholder, type, ...rest }: InputProps) => {
+export const Input = ({
+  name,
+  placeholder,
+  label,
+  type,
+  ...rest
+}: InputProps) => {
   const inputRef = useRef(null);
   const { fieldName, defaultValue, registerField } = useField(name);
   useEffect(() => {
@@ -26,12 +33,15 @@ export const Input = ({ name, placeholder, type, ...rest }: InputProps) => {
     });
   }, [fieldName, registerField]);
   return (
-    <input
-      name={name}
-      ref={inputRef}
-      type={type}
-      placeholder={placeholder}
-      {...rest}
-    />
+    <div style={{ display: "flex", flexDirection: "column" }}>
+      {label && <div>{label}</div>}
+      <input
+        name={name}
+        ref={inputRef}
+        type={type}
+        placeholder={placeholder}
+        {...rest}
+      />
+    </div>
   );
 };
