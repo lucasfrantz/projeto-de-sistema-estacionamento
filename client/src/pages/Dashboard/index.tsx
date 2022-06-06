@@ -18,6 +18,9 @@ import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import { mainListItems, secondaryListItems } from './listItems';
+import Carros from "../Dashboard/carros"
+import { useAuth } from '../../hooks/auth';
+
 
 export default function Dashboard() {
     return <DashboardContent />;
@@ -89,6 +92,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 const mdTheme = createTheme();
 
 function DashboardContent() {
+  const {user, Logout } = useAuth();
   const [open, setOpen] = React.useState(true);
   const toggleDrawer = () => {
     setOpen(!open);
@@ -177,13 +181,19 @@ function DashboardContent() {
                     height: 240,
                   }}
                 >
-                    Teste 1
+                {`Informações`} <br/>
+                <br/>
+                {`Nome: ${user?.name}`} <br/>
+                {`Email: ${user?.email}`} <br/>
+                {`Login: ${user?.login}`} <br/>
+                {`Celular: ${user?.phoneNumber}`} <br/>
                 </Paper>
               </Grid>
               {/* Recent Orders */}
               <Grid item xs={12}>
                 <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-                  Teste 2
+                  Carros
+                  <Carros />
                 </Paper>
               </Grid>
             </Grid>
