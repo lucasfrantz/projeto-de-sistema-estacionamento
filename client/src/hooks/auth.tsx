@@ -2,9 +2,16 @@ import React, { createContext, useState, useEffect, useContext } from "react";
 
 import { api } from "../services/api";
 
+interface User {
+  name: string;
+  email: string;
+  phoneNumber: string;
+  login: string;
+}
+
 interface AuthContextData {
   signed: boolean;
-  user: object | null;
+  user: User | null;
   Login(user: object): Promise<void>;
   Logout(): void;
 }
@@ -12,7 +19,7 @@ interface AuthContextData {
 const AuthContext = createContext<AuthContextData>({} as AuthContextData);
 
 export const AuthProvider: React.FC<any> = ({ children }) => {
-  const [user, setUser] = useState<object | null>(null);
+  const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
     const storagedUser = sessionStorage.getItem("@App:user");
