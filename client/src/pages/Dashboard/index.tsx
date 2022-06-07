@@ -19,6 +19,7 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import { mainListItems, secondaryListItems } from './listItems';
 import Carros from "../Dashboard/carros"
+import Ocupacoes from "../Dashboard/ocupacoes"
 import { useAuth } from '../../hooks/auth';
 
 
@@ -187,6 +188,21 @@ function DashboardContent() {
                 {`Email: ${user?.email}`} <br/>
                 {`Login: ${user?.login}`} <br/>
                 {`Celular: ${user?.phoneNumber}`} <br/>
+                </Paper>
+              </Grid>
+      
+              <Grid item xs={12} md={5} lg={5}>
+                <Paper
+                  sx={{
+                    p: 2,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    height: 240,
+                  }}
+                >
+                  Ocupações
+                  <br/>
+                  <Ocupacoes/>
                 </Paper>
               </Grid>
               {/* Recent Orders */}

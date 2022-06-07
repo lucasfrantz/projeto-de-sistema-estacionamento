@@ -60,7 +60,7 @@ export default function Carros() {
           ))}
         </TableBody>
       </Table>
-      <Link color="primary" href="#" onClick={preventDefault} sx={{ mt: 2 }}>
+      <Link color="primary" href="/car" onClick={preventDefault} sx={{ mt: 2 }}>
         Ver mais informações
       </Link>
     </React.Fragment>
