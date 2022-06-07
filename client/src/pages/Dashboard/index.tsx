@@ -16,10 +16,10 @@ import Paper from '@mui/material/Paper';
 import Link from '@mui/material/Link';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import NotificationsIcon from '@mui/icons-material/Notifications';
 import { mainListItems, secondaryListItems } from './listItems';
 import Carros from "../Dashboard/carros"
 import Ocupacoes from "../Dashboard/ocupacoes"
+import LogoutIcon from '@mui/icons-material/Logout';
 import { useAuth } from '../../hooks/auth';
 
 
@@ -106,7 +106,7 @@ function DashboardContent() {
         <AppBar position="absolute" open={open}>
           <Toolbar
             sx={{
-              pr: '24px', // keep right padding when drawer closed
+              pr: '24px',
             }}
           >
             <IconButton
@@ -132,7 +132,9 @@ function DashboardContent() {
             </Typography>
             <IconButton color="inherit">
               <Badge badgeContent={0} color="secondary">
-                <NotificationsIcon />
+                <LogoutIcon 
+                  onClick={Logout}
+                />
               </Badge>
             </IconButton>
           </Toolbar>
@@ -172,7 +174,7 @@ function DashboardContent() {
           <Toolbar />
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
             <Grid container spacing={3}>
-              {/* Recent Deposits */}
+              {/* informacoes */}
               <Grid item xs={12} md={4} lg={3}>
                 <Paper
                   sx={{
@@ -205,8 +207,8 @@ function DashboardContent() {
                   <Ocupacoes/>
                 </Paper>
               </Grid>
-              {/* Recent Orders */}
-              <Grid item xs={12}>
+              {/* carros */}
+              <Grid item xs={10}>
                 <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
                   Carros
                   <Carros />
