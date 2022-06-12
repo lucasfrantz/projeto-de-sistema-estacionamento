@@ -12,6 +12,7 @@ import { Register } from "../pages/Register";
 import { ProtectedRoute } from "./ProtectedRoute";
 import Dashboard from "../pages/Dashboard";
 import Placeholder from "../pages/Occupation";
+import Vehicles from "../pages/Vehicles";
 
 export const Router = () => {
   const { user } = useAuth();
@@ -36,10 +37,10 @@ export const Router = () => {
         }
       />
       <Route
-        path="car"
+        path="vehicles"
         element={
           <ProtectedRoute user={user}>
-            <Placeholder />
+            <Vehicles />
           </ProtectedRoute>
         }
       />

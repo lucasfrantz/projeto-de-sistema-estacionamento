@@ -21,7 +21,6 @@ import Ocupacoes from "../Dashboard/ocupacoes";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { useAuth } from "../../hooks/auth";
 import { mainListItems, secondaryListItems } from "../Dashboard/listItems";
-import Deposits from "../Dashboard/ocupacoes";
 
 function Copyright(props: any) {
   return (
@@ -93,7 +92,7 @@ const Drawer = styled(MuiDrawer, {
 
 const mdTheme = createTheme();
 
-export default function Occupations() {
+export default function Vehicles() {
   const { user, Logout } = useAuth();
   const [open, setOpen] = React.useState(true);
   const toggleDrawer = () => {
@@ -173,7 +172,7 @@ export default function Occupations() {
           <Toolbar />
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
             <Grid container spacing={3}>
-              <Deposits />
+              <Carros editable />
             </Grid>
             <Copyright sx={{ pt: 4 }} />
           </Container>
