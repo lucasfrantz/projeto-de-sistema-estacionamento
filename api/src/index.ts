@@ -5,6 +5,8 @@ import AppError from "./error";
 import sessionsRouter from "./routes/sessions";
 import usersRouter from "./routes/user";
 import cors from "cors";
+import vehiclesRouter from "./routes/vehicles";
+import occupationRouter from "./routes/occupation";
 const prisma = new PrismaClient();
 const app = express();
 
@@ -13,6 +15,8 @@ app.use(express.json());
 
 app.use("/users", usersRouter);
 app.use("/sessions", sessionsRouter);
+app.use("/vehicles", vehiclesRouter);
+app.use("/occupations", occupationRouter);
 
 app.use(function (
   err: Error,

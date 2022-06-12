@@ -8,5 +8,6 @@ const vehiclesController = new VehiclesContoller();
 
 vehiclesRouter.use(ensureAuthenticated);
 vehiclesRouter.get("/", vehiclesController.index);
+vehiclesRouter.post("/", vehiclesController.create);
 
 export default vehiclesRouter;

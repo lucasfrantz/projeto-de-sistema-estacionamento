@@ -7,7 +7,27 @@ export default class occupationController {
   constructor() {}
 
   async index(req: express.Request, res: express.Response) {
-    const occupation = await prisma.occupation.findMany();
-    res.json(occupation);
+    const { user } = req;
+    console.log(user?.id);
+    const vehicles = await prisma.vehicle.findMany({
+      where: { ownerId: user?.id },
+    });
+    console.log(vehicles);
+    const occupations = await prisma.occupation.findMany({
+      where: { vehicleId: { in: vehicles.map((vehicle) => vehicle.id) } },
+      select: {
+        arrivedAt: true,
+        leftAt: true,
+        vehicle: true,
+        parkingSpot: {
+          select: {
+            parkingLot: true,
+            parkingSpotType: true,
+            number: true,
+          },
+        },
+      },
+    });
+    res.json(occupations);
   }
 }
