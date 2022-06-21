@@ -70,11 +70,11 @@ export default function Deposits({ current }: OccupationProps) {
           );
         })}
       </div>
-      <div>
+      {/* <div>
         <Link color="primary" href="/occupation" onClick={preventDefault}>
           Mais informações
         </Link>
-      </div>
+      </div> */}
     </React.Fragment>
   );
 }

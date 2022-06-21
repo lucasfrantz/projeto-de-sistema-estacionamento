@@ -52,24 +52,46 @@ export default class occupationController {
   async current(req: express.Request, res: express.Response) {
     const { user } = req;
 
-    const occupations = await prisma.occupation.findMany({
-      select: {
-        arrivedAt: true,
-        leftAt: true,
-        vehicle: true,
-        id: true,
-        parkingSpot: {
+    const occupations = user?.isAdmin
+      ? await prisma.occupation.findMany({
           select: {
-            parkingLot: true,
-            parkingSpotType: true,
-            number: true,
+            arrivedAt: true,
+            leftAt: true,
+            vehicle: true,
+            id: true,
+            parkingSpot: {
+              select: {
+                parkingLot: true,
+                parkingSpotType: true,
+                number: true,
+              },
+            },
           },
-        },
-      },
-      where: {
-        leftAt: null,
-      },
-    });
+          where: {
+            leftAt: null,
+          },
+        })
+      : await prisma.occupation.findMany({
+          select: {
+            arrivedAt: true,
+            leftAt: true,
+            vehicle: true,
+            id: true,
+            parkingSpot: {
+              select: {
+                parkingLot: true,
+                parkingSpotType: true,
+                number: true,
+              },
+            },
+          },
+          where: {
+            leftAt: null,
+            vehicle: {
+              ownerId: user?.id,
+            },
+          },
+        });
 
     console.log(occupations);
 
