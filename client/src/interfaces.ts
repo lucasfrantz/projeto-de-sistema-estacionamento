@@ -24,6 +24,7 @@ export interface IParkingSpot {
 }
 
 export interface Occupation {
+  id: string;
   arrivedAt: Date;
   leftAt?: Date;
   vehicle: IVehicle;

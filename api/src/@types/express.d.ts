@@ -5,6 +5,7 @@ declare namespace Express {
       name: string;
       login: string;
       email: string;
+      isAdmin: boolean;
     };
   }
 }

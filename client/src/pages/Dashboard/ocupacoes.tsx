@@ -31,24 +31,43 @@ export default function Deposits() {
 
   return (
     <React.Fragment>
-      {occupations.map((occupation) => {
-        return (
-          <>
-            <div
-              key={`${occupation.arrivedAt}${occupation.parkingSpot.id}${occupation.vehicle.id}`}
-            >
-              <Typography component="p" variant="h5">
-                {`Veiculo: ${occupation.vehicle.model} ${occupation.vehicle.licensePlate} ${occupation.vehicle.color}`}
-              </Typography>
-              <Typography color="text.secondary" sx={{ flex: 1 }}>
-                {`Vaga: ${occupation.parkingSpot.parkingLot.name} Vaga ${
-                  occupation.parkingSpot.number
-                } R$: ${calculatePrice(occupation)}`}
-              </Typography>
-            </div>
-          </>
-        );
-      })}
+      <div style={{ display: "flex", flexDirection: "column", gap: "5px" }}>
+        {occupations.map((occupation) => {
+          return (
+            <>
+              <div
+                key={`${occupation.arrivedAt}${occupation.parkingSpot.id}${occupation.vehicle.id}`}
+                style={{
+                  padding: 5,
+                  boxShadow: "rgba(149, 157, 165, 0.2) 0px 8px 24px",
+                }}
+              >
+                <Typography component="p" variant="h5">
+                  {`Veiculo: ${occupation.vehicle.model} ${occupation.vehicle.licensePlate} ${occupation.vehicle.color}`}
+                </Typography>
+                <Typography color="text.secondary" sx={{ flex: 1 }}>
+                  {`Vaga: ${occupation.parkingSpot.parkingLot.name} Vaga ${occupation.parkingSpot.number}`}
+                </Typography>
+                <Typography color="text.secondary" sx={{ flex: 1 }}>
+                  {`Valor: R$${calculatePrice(occupation)}`}
+                </Typography>
+                <Typography color="text.primary" sx={{ flex: 1 }}>
+                  {`Entrada: ${new Date(
+                    occupation.arrivedAt
+                  ).toLocaleDateString()}`}
+                </Typography>
+                {occupation.leftAt && (
+                  <Typography color="text.primary" sx={{ flex: 1 }}>
+                    {`Saida: ${new Date(
+                      occupation.leftAt
+                    ).toLocaleDateString()}`}
+                  </Typography>
+                )}
+              </div>
+            </>
+          );
+        })}
+      </div>
       <div>
         <Link color="primary" href="/occupation" onClick={preventDefault}>
           Mais informações

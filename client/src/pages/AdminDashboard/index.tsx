@@ -16,12 +16,16 @@ import Paper from "@mui/material/Paper";
 import Link from "@mui/material/Link";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import { mainListItems, secondaryListItems } from "./listItems";
 import Carros from "../Dashboard/carros";
-import Ocupacoes from "../Dashboard/ocupacoes";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { useAuth } from "../../hooks/auth";
-import { mainListItems, secondaryListItems } from "../Dashboard/listItems";
-import Deposits from "../Dashboard/ocupacoes";
+import RegisterOccupation from "./RegisterOccupation";
+import Ocupacoes from "./ocupacoes";
+
+export default function AdminDashboard() {
+  return <DashboardContent />;
+}
 
 function Copyright(props: any) {
   return (
@@ -93,7 +97,7 @@ const Drawer = styled(MuiDrawer, {
 
 const mdTheme = createTheme();
 
-export default function Occupations() {
+function DashboardContent() {
   const { user, Logout } = useAuth();
   const [open, setOpen] = React.useState(true);
   const toggleDrawer = () => {
@@ -172,10 +176,54 @@ export default function Occupations() {
         >
           <Toolbar />
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-            <Grid item xs={10}>
-              <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
-                <Ocupacoes />
-              </Paper>
+            <Grid container spacing={3}>
+              {/* informacoes */}
+
+              <Grid item xs={12} md={4} lg={3}>
+                <Paper
+                  sx={{
+                    p: 2,
+                    display: "flex",
+                    flexDirection: "column",
+                    height: 240,
+                  }}
+                >
+                  {`Informações`} <br />
+                  <br />
+                  {`Nome: ${user?.name}`} <br />
+                  {`Email: ${user?.email}`} <br />
+                  {`Login: ${user?.login}`} <br />
+                  {`Celular: ${user?.phoneNumber}`} <br />
+                </Paper>
+              </Grid>
+
+              <Grid item xs={12} md={5} lg={5}>
+                <Paper
+                  sx={{
+                    p: 2,
+                    display: "flex",
+                    flexDirection: "column",
+                    height: 240,
+                  }}
+                >
+                  Ocupações
+                  <br />
+                  <RegisterOccupation />
+                </Paper>
+              </Grid>
+              {/* carros */}
+              {/* <Grid item xs={10}>
+                <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
+                  Carros
+                  <Carros />
+                </Paper>
+              </Grid> */}
+              <Grid item xs={10}>
+                <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
+                  Ocupacoes
+                  <Ocupacoes current />
+                </Paper>
+              </Grid>
             </Grid>
             <Copyright sx={{ pt: 4 }} />
           </Container>

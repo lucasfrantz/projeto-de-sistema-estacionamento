@@ -7,6 +7,7 @@ interface User {
   email: string;
   phoneNumber: string;
   login: string;
+  isAdmin: boolean;
 }
 
 interface AuthContextData {

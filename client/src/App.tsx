@@ -6,6 +6,7 @@ import { GlobalStyle } from "./styles/global";
 import { Router } from "./routes";
 import { BrowserRouter } from "react-router-dom";
 import { AuthProvider } from "./hooks/auth";
+import { OccupationProvider } from "./hooks/occupations";
 
 function App() {
   return (
@@ -13,7 +14,9 @@ function App() {
       <GlobalStyle />
       <BrowserRouter>
         <AuthProvider>
-          <Router />
+          <OccupationProvider>
+            <Router />
+          </OccupationProvider>
         </AuthProvider>
       </BrowserRouter>
     </>

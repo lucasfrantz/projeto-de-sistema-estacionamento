@@ -13,6 +13,7 @@ import { ProtectedRoute } from "./ProtectedRoute";
 import Dashboard from "../pages/Dashboard";
 import Placeholder from "../pages/Occupation";
 import Vehicles from "../pages/Vehicles";
+import Main from "../pages/Main";
 
 export const Router = () => {
   const { user } = useAuth();
@@ -24,7 +25,7 @@ export const Router = () => {
         path="dashboard"
         element={
           <ProtectedRoute user={user}>
-            <Dashboard />
+            <Main />
           </ProtectedRoute>
         }
       />

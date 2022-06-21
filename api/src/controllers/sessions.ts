@@ -24,7 +24,7 @@ export default class SessionsContoller {
 
   async login(req: express.Request, res: express.Response) {
     const { login, password } = req.body;
-    console.log(login);
+    // console.log(login);
     const user = await prisma.user.findUnique({
       where: { login },
     });
@@ -32,6 +32,10 @@ export default class SessionsContoller {
     if (!user) {
       throw new AppError("user_not_found", 401);
     }
+    const admin = await prisma.parkingLotAdmin.findFirst({
+      where: { useId: user.id },
+    });
+    // console.log(admin);
 
     const validPassword = await bcrypt.compare(password, user.password);
 
@@ -50,7 +54,7 @@ export default class SessionsContoller {
         }
 
         res.set("x-access-token", token);
-        res.json({ user, accessToken: token });
+        res.json({ user: { ...user, isAdmin: !!admin }, accessToken: token });
       }
     );
 

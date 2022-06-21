@@ -32,15 +32,20 @@ export default (
       res.status(403).end();
       return;
     }
-    console.log(userInfo);
+    // console.log(userInfo);
     if (userInfo && typeof userInfo !== "string") {
       const user = await prisma.user.findUnique({ where: { id: userInfo.id } });
+
       if (user) {
+        const admin = await prisma.parkingLotAdmin.findFirst({
+          where: { useId: user.id },
+        });
         req.user = {
           id: user.id,
           name: user.name,
           login: user.login,
           email: user.email,
+          isAdmin: !!admin,
         };
       }
     }

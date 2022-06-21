@@ -172,7 +172,7 @@ export default function Vehicles() {
           <Toolbar />
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
             <Grid container spacing={3}>
-              <Carros editable />
+              <Carros editable={!user?.isAdmin} />
             </Grid>
             <Copyright sx={{ pt: 4 }} />
           </Container>

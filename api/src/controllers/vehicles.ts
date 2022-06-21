@@ -1,5 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 import express from "express";
+import AppError from "../error";
 
 const prisma = new PrismaClient();
 
@@ -8,11 +9,16 @@ export default class VehiclesContoller {
 
   async index(req: express.Request, res: express.Response) {
     const { user } = req;
-    console.log(user?.id);
-    const vehicles = await prisma.vehicle.findMany({
-      where: { ownerId: user?.id },
+    // console.log(user?.id);
+
+    const admin = await prisma.parkingLotAdmin.findFirst({
+      where: { useId: user?.id },
     });
-    console.log(vehicles);
+    const vehicles = !admin
+      ? await prisma.vehicle.findMany({
+          where: { ownerId: user?.id },
+        })
+      : await prisma.vehicle.findMany();
     res.json(vehicles);
   }
 
