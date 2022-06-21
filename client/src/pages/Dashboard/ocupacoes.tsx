@@ -3,20 +3,21 @@ import Link from "@mui/material/Link";
 import Typography from "@mui/material/Typography";
 import { api } from "../../services/api";
 import { Occupation } from "../../interfaces";
+import { useOccupations } from "../../hooks/occupations";
 
 function preventDefault(event: React.MouseEvent) {
   event.preventDefault();
 }
 
-export default function Deposits() {
-  const [occupations, setOcuppations] = React.useState<Occupation[]>([]);
+interface OccupationProps {
+  current?: boolean;
+}
+
+export default function Deposits({ current }: OccupationProps) {
+  // const [occupations, setOcuppations] = React.useState<Occupation[]>([]);
+  const { occupations, currentOccupations, loadOccupations } = useOccupations();
 
   React.useEffect(() => {
-    const loadOccupations = async () => {
-      const response = await api.get("/occupations");
-      const occupations = response.data;
-      setOcuppations(occupations);
-    };
     loadOccupations();
   }, []);
 
@@ -32,7 +33,7 @@ export default function Deposits() {
   return (
     <React.Fragment>
       <div style={{ display: "flex", flexDirection: "column", gap: "5px" }}>
-        {occupations.map((occupation) => {
+        {(current ? currentOccupations : occupations).map((occupation) => {
           return (
             <>
               <div
@@ -68,11 +69,11 @@ export default function Deposits() {
           );
         })}
       </div>
-      <div>
+      {/* <div>
         <Link color="primary" href="/occupation" onClick={preventDefault}>
           Mais informações
         </Link>
-      </div>
+      </div> */}
     </React.Fragment>
   );
 }

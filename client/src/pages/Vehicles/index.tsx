@@ -171,9 +171,9 @@ export default function Vehicles() {
         >
           <Toolbar />
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-            <Grid container spacing={3}>
+            <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
               <Carros editable={!user?.isAdmin} />
-            </Grid>
+            </Paper>
             <Copyright sx={{ pt: 4 }} />
           </Container>
         </Box>

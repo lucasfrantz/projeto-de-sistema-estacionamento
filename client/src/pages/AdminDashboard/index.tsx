@@ -197,7 +197,7 @@ function DashboardContent() {
                 </Paper>
               </Grid>
 
-              <Grid item xs={12} md={5} lg={5}>
+              <Grid item xs={12} md={5} lg={7}>
                 <Paper
                   sx={{
                     p: 2,

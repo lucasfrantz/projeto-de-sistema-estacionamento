@@ -56,6 +56,11 @@ export default function Deposits({ current }: OccupationProps) {
               <Typography color="text.primary" sx={{ flex: 1 }}>
                 {`Valor: R$${calculatePrice(occupation)}`}
               </Typography>
+              <Typography color="text.primary" sx={{ flex: 1 }}>
+                {`Entrada: ${new Date(
+                  occupation.arrivedAt
+                ).toLocaleDateString()}`}
+              </Typography>
               <div style={{ display: "flex", flexDirection: "row-reverse" }}>
                 <Button onClick={() => finishOccupation(occupation)}>
                   Finalizar ocupação

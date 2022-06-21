@@ -11,6 +11,7 @@ import Modal from "react-modal";
 import { Form } from "@unform/web";
 import { Input } from "../../components/Input";
 import { useAuth } from "../../hooks/auth";
+import { Button } from "@mui/material";
 function createData(
   id: number,
   date: string,
@@ -91,14 +92,14 @@ export default function Carros({ editable }: CarrosProps) {
             placeholder="Placa"
           />
           <div style={{ display: "flex", flexDirection: "row-reverse" }}>
-            <button type="submit">Adicionar</button>
+            <Button type="submit">Adicionar</Button>
           </div>
         </Form>
       </Modal>
       {editable && (
-        <button onClick={() => setCreateVehicleOpen(true)}>
+        <Button onClick={() => setCreateVehicleOpen(true)}>
           Adicionar veiculo
-        </button>
+        </Button>
       )}
       <Table size="small">
         <TableHead>
