@@ -8,6 +8,7 @@ const parkingspotController = new ParkingspotContoller();
 
 parkingspotRouter.use(ensureAuthenticated);
 parkingspotRouter.get("/", parkingspotController.index);
+parkingspotRouter.get("/empty", parkingspotController.empty);
 // parkingspotRouter.get("/:id/parkingSpot", parkingspotController.index);
 parkingspotRouter.get("/:id/parkingSpot/:id2", parkingspotController.show);
 

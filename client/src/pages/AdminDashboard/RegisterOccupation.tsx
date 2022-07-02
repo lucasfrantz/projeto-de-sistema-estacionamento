@@ -59,7 +59,7 @@ export default function RegisterOccupation() {
         })
       );
 
-      const parkingSpotsResponse = await api.get("/parking-spots");
+      const parkingSpotsResponse = await api.get("/parking-spots/empty");
       const parkingSpotsData = parkingSpotsResponse.data;
       setParkingSpots(parkingSpotsData);
       setParkingSpotsSelectOptions(

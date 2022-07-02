@@ -14,6 +14,23 @@ export default class parkingSpotController {
     res.json(parkingSpot);
   }
 
+  async empty(req: express.Request, res: express.Response) {
+    const parkingSpot = await prisma.parkingSpot.findMany({
+      select: { id: true, number: true, parkingLot: true },
+      where: {
+        occupations: {
+          some: {
+            leftAt: {
+              not: null,
+            },
+          },
+        },
+      },
+    });
+    // console.log(parkingSpot);
+    res.json(parkingSpot);
+  }
+
   async show(req: express.Request, res: express.Response) {
     // const { id, id2 } = req.params;
     // const parkingSpot = await prisma.parkingSpot.findUnique({
