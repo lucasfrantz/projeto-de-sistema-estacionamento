@@ -91,6 +91,10 @@ export default function Vagas() {
   function handleLotChange(e: any) {
     setSelectedLot(e.value);
   }
+  async function deleteSpot(id: string) {
+    await api.delete(`/parking-spots/${id}`);
+    loadVehicles();
+  }
   return (
     <React.Fragment>
       <Modal style={customStyles} isOpen={isCreateVehicleOpen}>
@@ -121,9 +125,7 @@ export default function Vagas() {
           </div>
         </Form>
       </Modal>
-      <Button onClick={() => setCreateVehicleOpen(true)}>
-        Adicionar veiculo
-      </Button>
+      <Button onClick={() => setCreateVehicleOpen(true)}>Adicionar vaga</Button>
       <Table size="small">
         <TableHead>
           <TableRow>
@@ -132,6 +134,7 @@ export default function Vagas() {
             <TableCell>Numero</TableCell>
             <TableCell>Preço por dia</TableCell>
             <TableCell>Ocupada</TableCell>
+            <TableCell></TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -142,13 +145,16 @@ export default function Vagas() {
               <TableCell>{vehicle.number}</TableCell>
               <TableCell>R${vehicle.parkingSpotType.price}</TableCell>
               <TableCell>{vehicle.occupied ? "Ocupada" : "Vaga"}</TableCell>
+              <TableCell>
+                <Button onClick={() => deleteSpot(vehicle.id)}>Deletar</Button>
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>
       </Table>
-      <Link color="primary" href="/car" onClick={preventDefault} sx={{ mt: 2 }}>
+      {/* <Link color="primary" href="/car" onClick={preventDefault} sx={{ mt: 2 }}>
         Ver mais informações
-      </Link>
+      </Link> */}
     </React.Fragment>
   );
 }

@@ -77,4 +77,31 @@ export default class parkingSpotController {
 
     res.status(201).json(vehicle);
   }
+
+  async delete(req: express.Request, res: express.Response) {
+    const { id } = req.params;
+
+    const occupations = await prisma.occupation.findMany({
+      where: {
+        parkingSpotId: id,
+      },
+    });
+    await Promise.all(
+      occupations.map(async (occupation) => {
+        await prisma.occupation.delete({
+          where: {
+            id: occupation.id,
+          },
+        });
+      })
+    );
+
+    await prisma.parkingSpot.delete({
+      where: {
+        id,
+      },
+    });
+
+    res.status(204).end();
+  }
 }

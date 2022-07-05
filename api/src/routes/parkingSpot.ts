@@ -12,5 +12,6 @@ parkingspotRouter.get("/empty", parkingspotController.empty);
 // parkingspotRouter.get("/:id/parkingSpot", parkingspotController.index);
 parkingspotRouter.get("/:id/parkingSpot/:id2", parkingspotController.show);
 parkingspotRouter.post("/", parkingspotController.create);
+parkingspotRouter.delete("/:id", parkingspotController.delete);
 
 export default parkingspotRouter;

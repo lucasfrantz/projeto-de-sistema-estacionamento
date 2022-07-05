@@ -22,6 +22,21 @@ export default class VehiclesContoller {
     res.json(vehicles);
   }
 
+  async notParked(req: express.Request, res: express.Response) {
+    const vehicles = await prisma.vehicle.findMany({
+      where: {
+        occupations: {
+          every: {
+            leftAt: {
+              not: null,
+            },
+          },
+        },
+      },
+    });
+    res.json(vehicles);
+  }
+
   async create(req: express.Request, res: express.Response) {
     const { model, licensePlate, color, ownerId } = req.body;
     let userId = ownerId;

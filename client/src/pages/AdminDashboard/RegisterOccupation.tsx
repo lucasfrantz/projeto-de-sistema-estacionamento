@@ -50,7 +50,7 @@ export default function RegisterOccupation() {
   }
   React.useEffect(() => {
     const loadData = async () => {
-      const vehiclesResponse = await api.get("/vehicles");
+      const vehiclesResponse = await api.get("/vehicles/notParked");
       const vehiclesData = vehiclesResponse.data;
       setVehicles(vehiclesData);
       setVehicleSelectOptions(

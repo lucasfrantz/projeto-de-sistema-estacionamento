@@ -21,6 +21,10 @@ import Ocupacoes from "../Dashboard/ocupacoes";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { useAuth } from "../../hooks/auth";
 import { mainListItems, secondaryListItems } from "../Dashboard/listItems";
+import {
+  mainListItems as adminListItems,
+  secondaryListItems as adminSecondary,
+} from "../AdminDashboard/listItems";
 
 function Copyright(props: any) {
   return (
@@ -152,9 +156,9 @@ export default function Vehicles() {
           </Toolbar>
           <Divider />
           <List component="nav">
-            {mainListItems}
+            {user?.isAdmin ? adminListItems : mainListItems}
             <Divider sx={{ my: 1 }} />
-            {secondaryListItems}
+            {user?.isAdmin ? adminSecondary : secondaryListItems}
           </List>
         </Drawer>
         <Box
