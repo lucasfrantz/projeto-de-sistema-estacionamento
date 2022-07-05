@@ -27,6 +27,7 @@ import {
 } from "../AdminDashboard/listItems";
 
 import Deposits from "../Dashboard/ocupacoes";
+import Vagas from "../AdminDashboard/vagas";
 
 function Copyright(props: any) {
   return (
@@ -179,7 +180,7 @@ export default function Occupations() {
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
             <Grid item xs={10}>
               <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
-                <Ocupacoes />
+                <Vagas />
               </Paper>
             </Grid>
             <Copyright sx={{ pt: 4 }} />

@@ -14,6 +14,9 @@ import Dashboard from "../pages/Dashboard";
 import Placeholder from "../pages/Occupation";
 import Vehicles from "../pages/Vehicles";
 import Main from "../pages/Main";
+import Occupations from "../pages/Occupation";
+import ParkingSpots from "../pages/ParkingSpots";
+import Vagas from "../pages/AdminDashboard/vagas";
 
 export const Router = () => {
   const { user } = useAuth();
@@ -33,7 +36,7 @@ export const Router = () => {
         path="occupation"
         element={
           <ProtectedRoute user={user}>
-            <Placeholder />
+            <Occupations />
           </ProtectedRoute>
         }
       />
@@ -42,6 +45,14 @@ export const Router = () => {
         element={
           <ProtectedRoute user={user}>
             <Vehicles />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="parkingspots"
+        element={
+          <ProtectedRoute user={user}>
+            <ParkingSpots />
           </ProtectedRoute>
         }
       />

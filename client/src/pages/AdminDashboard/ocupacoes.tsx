@@ -23,7 +23,7 @@ export default function Deposits({ current }: OccupationProps) {
 
   const calculatePrice = (occupation: Occupation) => {
     const arrivedAt = new Date(occupation.arrivedAt);
-    const now = new Date();
+    const now = occupation.leftAt ? new Date(occupation.leftAt) : new Date();
     const diffTime = now.getTime() - arrivedAt.getTime();
     const diffDays = diffTime / (1000 * 3600 * 24);
     const days = Math.floor(diffDays);

@@ -41,5 +41,13 @@ export const secondaryListItems = (
         <ListItemText primary="Carros" />
       </ListItemButton>
     </Link>
+    <Link style={{ textDecoration: "none" }} to="/parkingspots">
+      <ListItemButton>
+        <ListItemIcon>
+          <AssignmentIcon />
+        </ListItemIcon>
+        <ListItemText primary="Vagas" />
+      </ListItemButton>
+    </Link>
   </React.Fragment>
 );

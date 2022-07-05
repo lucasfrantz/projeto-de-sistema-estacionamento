@@ -8,6 +8,7 @@ import cors from "cors";
 import vehiclesRouter from "./routes/vehicles";
 import occupationRouter from "./routes/occupation";
 import parkingspotRouter from "./routes/parkingSpot";
+import parkinglotsRouter from "./routes/parkingLot";
 const prisma = new PrismaClient();
 const app = express();
 
@@ -19,6 +20,7 @@ app.use("/sessions", sessionsRouter);
 app.use("/vehicles", vehiclesRouter);
 app.use("/occupations", occupationRouter);
 app.use("/parking-spots", parkingspotRouter);
+app.use("/parking-lots", parkinglotsRouter);
 
 app.use(function (
   err: Error,

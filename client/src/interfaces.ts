@@ -21,6 +21,7 @@ export interface IParkingSpot {
   number: number;
   parkingLot: IParkingLot;
   parkingSpotType: IParkingSpotType;
+  occupied: boolean;
 }
 
 export interface Occupation {
